@@ -39,10 +39,11 @@ var app = (function () {
                 ctx.beginPath();
                 var puntosTMP = JSON.parse(eventbody.body);
                 ctx.moveTo(puntosTMP[0].x,puntosTMP[0].y);
-                puntosTMP.map(function(element){ctx.lineTo(element.x,element.y);});
-
+                puntosTMP.map(function(element){
+                    ctx.lineTo(element.x,element.y);
+                });
                 ctx.lineTo(puntosTMP[0].x,puntosTMP[0].y)
-                ctx.closePath();
+                ctx.stroke();
 
             });
         });
