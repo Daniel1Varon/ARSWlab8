@@ -14,21 +14,8 @@ var app = (function () {
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
         ctx.beginPath();
-        point.map(function(element){
-            ctx.lineTo(element.x,element.y);
-        });
         ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
         ctx.stroke();
-    };
-
-
-    var getMousePosition = function (evt) {
-        canvas = document.getElementById("canvas");
-        var rect = canvas.getBoundingClientRect();
-        return {
-            x: evt.clientX - rect.left,
-            y: evt.clientY - rect.top
-        };
     };
 
 
@@ -71,10 +58,9 @@ var app = (function () {
             connectAndSubscribe(id);
         },
 
-        publishPoint: function(){
-            var pt=getMousePosition(onclick);
-            pt=new Point(pt.x,pt.y)
-            console.info("publishing point at x: "+pt.x+" y: "+pt.y);
+        publishPoint: function(px,py){
+            pt=new Point(px,py)
+            console.info("publishing point at x: "+px+" y: "+py);
             addPointToCanvas(pt);
 
             //publicar el evento
