@@ -28,7 +28,7 @@ var app = (function () {
     };
 
 
-    var connectAndSubscribe = function () {
+    var connectAndSubscribe = function (id) {
         console.info('Connecting to WS...');
         var socket = new SockJS('/stompendpoint');
         stompClient = Stomp.over(socket);
@@ -36,7 +36,7 @@ var app = (function () {
         //subscribe to /topic/TOPICXX when connections succeed
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/newpoint', function (eventbody) {
+            stompClient.subscribe("/topic/newpoint."+id, function (eventbody) {
                 var tmpPoint= JSON.parse(eventbody.body);
                 addPointToCanvas(tmpPoint);
                 
@@ -49,11 +49,11 @@ var app = (function () {
 
     return {
 
-        init: function () {
+        init: function (id) {
             var can = document.getElementById("canvas");
             
             //websocket connection
-            connectAndSubscribe();
+            connectAndSubscribe(id);
         },
 
         publishPoint: function(px,py){
