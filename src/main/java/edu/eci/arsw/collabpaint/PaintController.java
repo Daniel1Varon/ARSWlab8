@@ -16,5 +16,4 @@ public class PaintController {
         return ("Hello");
     }
 
-
 }
