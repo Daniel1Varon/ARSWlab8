@@ -29,5 +29,4 @@ public class PaintController {
             msgt.convertAndSend("/topic/newpolygon."+id,points);
         }
     }
-
 }
